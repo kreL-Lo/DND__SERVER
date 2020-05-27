@@ -74,6 +74,15 @@ public class SetWeaponArmor {
         out.put("PROTOCOL","SPAWN_ENTITY");
         out.put("ANSWER","NPC UPDATED");
         out.put("SUCCESS",1);
+        Lobby l = LOBBYController.findbyName(roomName);
+        User u = l.findUser(playerName);
+        if(weapons!=null)
+            u.getWeapons().add(weapons);
+        
+        if(armor!=null)
+            u.getArmors().add(armors);
+        l.updateUser(u);
+        LOBBYController.update(u);
         return out;
     }
 
